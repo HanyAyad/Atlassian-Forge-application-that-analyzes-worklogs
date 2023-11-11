@@ -40,10 +40,20 @@ export const run = render(
 );
 
 const Panel = () => {
+    const { platformContext: { issueKey } } = useProductContext();
+
     return (
         <Fragment>
-            <Text>Hello world!</Text>
+            <Text>Hey user!</Text>
+            <Text>Issue key of this issue is: {issueKey}</Text>
+            <Button text="Click me and nothing would happen, just console log" onClick={() => console.log('Button clicked!')} />
+            <Button text="Click me and I will fetch the number of issues (idk how to show result yet lol!)" onClick={async () => {
+                const response = await api.asApp().requestJira(route`/rest/api/3/search`);
+                const body = await response.json();
+                console.log(body.total);
+            }} />
         </Fragment>
+
     );
 }
 export const panel = render(
