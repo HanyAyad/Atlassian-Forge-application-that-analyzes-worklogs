@@ -1,7 +1,7 @@
 modules:
   jira:projectPage:
     - key: issuedescriptioncustomapp-hello-world-page
-      function: main
+      function: appPage
       title: IssueDescriptionCustomApp
       icon: https://developer.atlassian.com/platform/forge/images/icons/project-page-icon.svg
       conditions:
@@ -11,7 +11,7 @@ modules:
           - business
   jira:issuePanel:
     - key: issuedescriptioncustomapp-hello-world-panel
-      function: main
+      function: panel
       title: IssueDescriptionCustomApp
       icon: https://developer.atlassian.com/platform/forge/images/icons/issue-panel-icon.svg
       permissions:
@@ -21,7 +21,9 @@ modules:
           - 'storage:app' # Required for the 'storage' function
           - 'read:jira-user' # Required for the 'userAccountId' function
   function:
-    - key: main
+    - key: appPage
+      handler: index.appPage
+    - key: panel
       handler: index.panel
   jira:customField:
     - key: customField1

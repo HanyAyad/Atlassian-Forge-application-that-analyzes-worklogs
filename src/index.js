@@ -25,15 +25,14 @@ const fetchNumberOfIssues = async () => {
 }
 
 const App = () => {
-    const [numIssues] = useState(async () => await fetchNumberOfIssues());
     return (
         <Fragment>
-            <Text>Number of issues: {numIssues}</Text>
+            <Text>Hello world!</Text>
         </Fragment>
     );
 }
 
-export const run = render(
+export const appPage = render(
     <ProjectPage>
         <App />
     </ProjectPage>
@@ -41,21 +40,24 @@ export const run = render(
 
 const Panel = () => {
     const { platformContext: { issueKey } } = useProductContext();
+    const [numIssues, setNumIssues] = useState(0);
+
+    const fetchAndSetNumIssues = async () => {
+        const numberOfIssues = await fetchNumberOfIssues();
+        setNumIssues(numberOfIssues);
+    };
 
     return (
         <Fragment>
             <Text>Hey user!</Text>
             <Text>Issue key of this issue is: {issueKey}</Text>
             <Button text="Click me and nothing would happen, just console log" onClick={() => console.log('Button clicked!')} />
-            <Button text="Click me and I will fetch the number of issues (idk how to show result yet lol!)" onClick={async () => {
-                const response = await api.asApp().requestJira(route`/rest/api/3/search`);
-                const body = await response.json();
-                console.log(body.total);
-            }} />
+            <Button text="Show number of issues" onClick={fetchAndSetNumIssues} />
+            {numIssues > 0 && <Text>Number of issues: {numIssues}</Text>}
         </Fragment>
-
     );
-}
+};
+
 export const panel = render(
     <IssuePanel>
         <Panel />
