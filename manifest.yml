@@ -1,0 +1,42 @@
+modules:
+  jira:projectPage:
+    - key: issuedescriptioncustomapp-hello-world-page
+      function: main
+      title: IssueDescriptionCustomApp
+      icon: https://developer.atlassian.com/platform/forge/images/icons/project-page-icon.svg
+      conditions:
+        projectType:
+          - software
+          - service_desk
+          - business
+  jira:issuePanel:
+    - key: issuedescriptioncustomapp-hello-world-panel
+      function: main
+      title: IssueDescriptionCustomApp
+      icon: https://developer.atlassian.com/platform/forge/images/icons/issue-panel-icon.svg
+      permissions:
+        scopes:
+          - 'read:jira-work' # Required for the 'issuePanel' module
+          - 'write:jira-work' # Required for the 'update' function
+          - 'storage:app' # Required for the 'storage' function
+          - 'read:jira-user' # Required for the 'userAccountId' function
+  function:
+    - key: main
+      handler: index.panel
+  jira:customField:
+    - key: customField1
+      name: My Custom Field
+      description: This is a custom field for additional information.
+      type: string  # Update the type to 'string' for a single-line text field.
+      options:
+        isRequired: true
+      contexts:
+        - project
+permissions:
+  scopes:
+    - 'read:jira-work' # Required for the 'issuePanel' module
+    - 'write:jira-work' # Required for the 'update' function
+    - 'storage:app' # Required for the 'storage' function
+    - 'read:jira-user' # Required for the 'userAccountId' function
+app:
+  id: ari:cloud:ecosystem::app/60d86e29-6b11-4f51-84d1-f6ef8c0fdd37
