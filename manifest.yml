@@ -26,14 +26,20 @@ modules:
     - key: panel
       handler: index.panel
   jira:customField:
-    - key: customField1
-      name: My Custom Field
-      description: This is a custom field for additional information.
-      type: string  # Update the type to 'string' for a single-line text field.
-      options:
-        isRequired: true
+    - key: estimatedTimeToComplete
+      name: Estimated Time to Complete
+      description: This field represents the estimated time required to complete a task.
+      type: number  # Assuming time is measured in hours, you can use 'number' type.
       contexts:
         - project
+
+    - key: priorityScore
+      name: Priority Score
+      description: This field represents the priority of the issue.
+      type: number  # You can adjust the type based on your requirements.
+      contexts:
+        - project
+
 permissions:
   scopes:
     - 'read:jira-work' # Required for the 'issuePanel' module
