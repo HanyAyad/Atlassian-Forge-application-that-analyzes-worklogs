@@ -9,6 +9,16 @@ modules:
           - software
           - service_desk
           - business
+      permissions:
+        scopes:
+          - 'storage:app'
+          - 'read:jira-user'
+          - 'write:jira-user'
+          - 'read:jira-work'
+          - 'write:jira-work'
+          - 'read:jira-configuration'
+          - 'read:org'
+          - 'write:org'
   jira:issuePanel:
     - key: issuedescriptioncustomapp-hello-world-panel
       function: panel
@@ -18,7 +28,6 @@ modules:
         scopes:
           - 'read:jira-work' # Required for the 'issuePanel' module
           - 'write:jira-work' # Required for the 'update' function
-          - 'storage:app' # Required for the 'storage' function
           - 'read:jira-user' # Required for the 'userAccountId' function
   function:
     - key: appPage
@@ -46,5 +55,7 @@ permissions:
     - 'write:jira-work' # Required for the 'update' function
     - 'storage:app' # Required for the 'storage' function
     - 'read:jira-user' # Required for the 'userAccountId' function
+    - 'storage:app' # Required for the 'storage' function
+
 app:
   id: ari:cloud:ecosystem::app/60d86e29-6b11-4f51-84d1-f6ef8c0fdd37

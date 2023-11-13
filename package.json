@@ -1,7 +1,10 @@
 {
   "dependencies": {
+    "@appsvio/forge-storage-browser": "^1.1.9",
     "@forge/api": "^2.20.0",
+    "@forge/storage": "^1.5.12",
     "@forge/ui": "^1.9.10",
+    "@mui/material": "^5.14.17",
     "react": "^18.2.0"
   }
 }

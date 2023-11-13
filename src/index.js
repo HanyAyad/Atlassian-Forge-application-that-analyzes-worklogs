@@ -6,16 +6,12 @@ import ForgeUI, {
     Button,
     useState,
     useProductContext,
-    useConfig,
-    ProjectPage
+    ProjectPage,
+    Form,
+    Toggle
 } from "@forge/ui";
 import api, { route } from "@forge/api";
-import { fetch } from '@forge/api';
-import { storage } from "@forge/api";
 import { useEffect } from "react";
-// import { useIssueProperty } from "@forge/ui-jira";
-// import { useIssueKey } from "@forge/ui-jira";
-// import { useProductContext } from '@forge/ui';
 
 
 const fetchNumberOfIssues = async () => {
@@ -24,14 +20,40 @@ const fetchNumberOfIssues = async () => {
     return body.total;
 }
 
+
 const App = () => {
+    const [enableIssuePanel, setEnableIssuePanel] = useState(true);
+    const [enableCustomFields, setEnableCustomFields] = useState(true);
+
+    const handleIssuePanelChange = () => {
+        setEnableIssuePanel(!enableIssuePanel);
+    };
+
+    const handleCustomFieldsChange = () => {
+        setEnableCustomFields(!enableCustomFields);
+    };
+
+    function handleSubmit() {
+        console.log("Submit");
+
+    }
+
     return (
-        <Fragment>
-            <Text>Hello world!</Text>
-        </Fragment>
+        <Form onSubmit={handleSubmit}>
+            <Toggle
+                label="Enable Issue Panel"
+                onChange={handleIssuePanelChange}
+                checked={enableIssuePanel}
+                name={"enableissue"}/>
+            <Toggle
+                label="Enable Custom Fields"
+                onChange={handleCustomFieldsChange}
+                checked={enableCustomFields}
+                name={"enablecustom"}
+            />
+        </Form>
     );
 }
-
 export const appPage = render(
     <ProjectPage>
         <App />
@@ -51,6 +73,8 @@ const Panel = () => {
 
     return (
         <Fragment>
+            {true && (
+            <Fragment>
             <Text>Hey user!</Text>
             {issueKey && <Text>Issue key of this issue is: {issueKey}</Text>}
             <Button text="Click me and nothing would happen, just console log" onClick={() => console.log('Button clicked!')} />
@@ -59,7 +83,10 @@ const Panel = () => {
 
             {/* Display and update the custom fields */}
             {issueKey && <CustomFields issueKey={issueKey} />}
+            </Fragment>
+                )}
         </Fragment>
+
     );
 };
 
